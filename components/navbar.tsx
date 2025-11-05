@@ -1,20 +1,10 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { FaRobot, FaUsers, FaBrain, FaSignOutAlt, FaUser, FaHeart } from "react-icons/fa"
+import { FaRobot, FaUsers, FaBrain, FaUser, FaHeart } from "react-icons/fa"
 import { HiMenu, HiX } from "react-icons/hi"
-import { useAuth } from "@contexts/AuthContext"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { currentUser, logout } = useAuth()
-
-  const handleLogout = async () => {
-    try {
-      await logout()
-    } catch (error) {
-      console.error("Failed to log out:", error)
-    }
-  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050714]/95 backdrop-blur-md border-b border-[#00ffff]/30">
@@ -22,9 +12,9 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-4">
-            <img 
-              src="/galatea-ai-white.png" 
-              alt="Galatea AI" 
+            <img
+              src="/galatea-ai-white.png"
+              alt="Galatea AI"
               className="w-8 h-8 object-contain"
             />
             <div className="flex flex-col">
@@ -39,66 +29,27 @@ export function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {currentUser && (
-              <>
-                <Link
-                  to="/swipes"
-                  className="flex items-center gap-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-2 py-1 rounded-lg border border-transparent hover:border-[#00ffff]/30"
-                >
-                  <FaHeart className="text-sm" />
-                  Discover
-                </Link>
-                <Link
-                  to="/matches"
-                  className="flex items-center gap-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-2 py-1 rounded-lg border border-transparent hover:border-[#00ffff]/30"
-                >
-                  <FaUsers className="text-sm" />
-                  Matches
-                </Link>
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-2 py-1 rounded-lg border border-transparent hover:border-[#00ffff]/30"
-                >
-                  <FaUser className="text-sm" />
-                  Profile
-                </Link>
-              </>
-            )}
-            
-            {/* Auth buttons */}
-            <div className="flex items-center gap-3">
-              {currentUser ? (
-                // Authenticated user menu
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-gray-300">
-                    Welcome, {currentUser.displayName || currentUser.email?.split('@')[0] || 'Friend'}
-                  </span>
-                  <button
-                    onClick={handleLogout}
-                    className="text-gray-300 hover:text-[#ff0080] transition-colors duration-300 px-4 py-2 rounded-lg border border-transparent hover:border-[#ff0080]/30 flex items-center gap-2"
-                  >
-                    <FaSignOutAlt className="text-sm" />
-                    Sign Out
-                  </button>
-                </div>
-              ) : (
-                // Unauthenticated user buttons
-                <>
-                  <Link
-                    to="/signin"
-                    className="text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-4 py-2 rounded-lg border border-transparent hover:border-[#00ffff]/30"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    to="/signup"
-                    className="bg-[#00ffff] hover:bg-[#c0fdff] text-black font-bold px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00ffff]/50"
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              )}
-            </div>
+            <Link
+              to="/companions"
+              className="flex items-center gap-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-2 py-1 rounded-lg border border-transparent hover:border-[#00ffff]/30"
+            >
+              <FaUsers className="text-sm" />
+              Companions
+            </Link>
+            <a
+              href="/#how-it-works"
+              className="flex items-center gap-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-2 py-1 rounded-lg border border-transparent hover:border-[#00ffff]/30"
+            >
+              <FaBrain className="text-sm" />
+              How It Works
+            </a>
+            <a
+              href="/#about"
+              className="flex items-center gap-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300 px-2 py-1 rounded-lg border border-transparent hover:border-[#00ffff]/30"
+            >
+              <FaRobot className="text-sm" />
+              About
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -114,91 +65,30 @@ export function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden bg-[#050714]/98 border-t border-[#00ffff]/30">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {currentUser ? (
-                // Authenticated mobile menu
-                <>
-                  <Link
-                    to="/swipes"
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaHeart className="text-sm" />
-                    Discover
-                  </Link>
-                  <Link
-                    to="/matches"
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaUsers className="text-sm" />
-                    Matches
-                  </Link>
-                  <Link
-                    to="/profile"
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaUser className="text-sm" />
-                    Profile
-                  </Link>
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setIsMenuOpen(false);
-                    }}
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#ff0080] transition-colors duration-300 w-full text-left"
-                  >
-                    <FaSignOutAlt className="text-sm" />
-                    Sign Out
-                  </button>
-                </>
-              ) : (
-                // Unauthenticated mobile menu
-                <>
-                  <Link
-                    to="/about"
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaRobot className="text-sm" />
-                    About
-                  </Link>
-                  <Link
-                    to="/companions"
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaUsers className="text-sm" />
-                    Companions
-                  </Link>
-                  <a
-                    href="/#how-it-works"
-                    className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FaBrain className="text-sm" />
-                    How It Works
-                  </a>
-                  
-                  {/* Mobile auth buttons */}
-                  <div className="px-3 py-2 space-y-2">
-                    <Link
-                      to="/auth/signin"
-                      className="block w-full text-center text-gray-300 hover:text-[#00ffff] py-2 rounded-lg border border-[#00ffff]/30 transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      to="/auth/signup"
-                      className="block w-full text-center bg-[#00ffff] hover:bg-[#c0fdff] text-black font-bold py-2 rounded-lg transition-all duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Sign Up
-                    </Link>
-                  </div>
-                </>
-              )}
+              <Link
+                to="/companions"
+                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <FaUsers className="text-sm" />
+                Companions
+              </Link>
+              <a
+                href="/#how-it-works"
+                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <FaBrain className="text-sm" />
+                How It Works
+              </a>
+              <a
+                href="/#about"
+                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-[#00ffff] transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <FaRobot className="text-sm" />
+                About
+              </a>
             </div>
           </div>
         )}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@contexts/AuthContext';
 import {
   Box,
   Card,
@@ -29,7 +28,6 @@ import {
   Psychology as PsychologyIcon
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import { getUserProfile, DatingProfile } from '@/lib/datingProfile';
 
 interface QuickAction {
   id: string;
@@ -42,29 +40,10 @@ interface QuickAction {
 }
 
 const WelcomeDashboard: React.FC = () => {
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
-  
-  const [profile, setProfile] = useState<DatingProfile | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const loadProfile = async () => {
-      if (!currentUser) return;
-      
-      try {
-        const userProfile = await getUserProfile(currentUser.uid);
-        setProfile(userProfile);
-      } catch (error) {
-        console.error('Error loading profile:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadProfile();
-  }, [currentUser]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const quickActions: QuickAction[] = [
     {
@@ -151,52 +130,24 @@ const WelcomeDashboard: React.FC = () => {
           }}
         >
           <Avatar
-            src={currentUser?.photoURL || (profile?.photos?.[0]) || ''}
-            sx={{ 
-              width: 80, 
-              height: 80, 
-              mx: 'auto', 
+            sx={{
+              width: 80,
+              height: 80,
+              mx: 'auto',
               mb: 2,
               border: `3px solid ${theme.palette.primary.main}`
             }}
           >
-            {(currentUser?.displayName || profile?.displayName)?.[0] || 'U'}
+            G
           </Avatar>
-          
+
           <Typography variant="h4" gutterBottom sx={{ color: theme.palette.primary.main }}>
-            Welcome back, {currentUser?.displayName || profile?.displayName || 'Friend'}!
-          </Typography>
-          
-          <Typography variant="h6" color="text.secondary" paragraph>
-            Ready to continue your AI companion journey?
+            Welcome to Galatea AI!
           </Typography>
 
-          {profile?.interests && profile.interests.length > 0 && (
-            <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap" mt={2}>
-              {profile.interests.slice(0, 5).map((interest: string) => (
-                <Chip
-                  key={interest}
-                  label={interest}
-                  size="small"
-                  sx={{
-                    backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                    color: theme.palette.primary.main,
-                    border: `1px solid ${alpha(theme.palette.primary.main, 0.3)}`
-                  }}
-                />
-              ))}
-              {profile.interests.length > 5 && (
-                <Chip
-                  label={`+${profile.interests.length - 5} more`}
-                  size="small"
-                  sx={{
-                    backgroundColor: alpha(theme.palette.secondary.main, 0.1),
-                    color: theme.palette.secondary.main
-                  }}
-                />
-              )}
-            </Stack>
-          )}
+          <Typography variant="h6" color="text.secondary" paragraph>
+            Explore the mythos of AI companions
+          </Typography>
         </Paper>
       </motion.div>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAuth } from '@contexts/AuthContext';
 import { ProfileProvider, useProfile } from '@contexts/ProfileContext';
 import { ProfileSidebar } from './ProfileSidebar';
 import { SocialsScreen } from './SocialsScreen';
@@ -8,7 +7,7 @@ import { FriendsScreen } from './FriendsScreen';
 import { DatingProfileScreenMUI } from './DatingProfileScreenMUI';
 
 function ProfilePageContent() {
-  const { currentUser } = useAuth();
+  
   const { activeScreen } = useProfile();
 
   const renderContent = () => {

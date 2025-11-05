@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useAuth } from '@contexts/AuthContext';
 import { FaUser, FaEdit, FaSave, FaTimes, FaHeart, FaArrowRight, FaCamera, FaPalette, FaBell, FaLock } from 'react-icons/fa';
 import { updateProfile } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 export function ProfileSetupScreen() {
-  const { currentUser } = useAuth();
+  
   const [displayName, setDisplayName] = useState(currentUser?.displayName || '');
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);

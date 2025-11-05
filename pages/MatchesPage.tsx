@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '@contexts/AuthContext';
 import { 
   FaHeart, 
   FaTimes, 
@@ -19,7 +18,7 @@ import {
 } from '@/lib/datingProfile';
 
 export function MatchesPage() {
-  const { currentUser } = useAuth();
+  
   const [matches, setMatches] = useState<DatingProfile[]>([]);
   const [currentProfile, setCurrentProfile] = useState<DatingProfile | null>(null);
   const [preferences, setPreferences] = useState<ProfilePreferences | null>(null);

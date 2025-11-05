@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@contexts/AuthContext';
 import {
   Box,
   Card,
@@ -49,7 +48,7 @@ interface ProfileCard {
 }
 
 const TinderStyleOnboarding: React.FC = () => {
-  const { currentUser } = useAuth();
+  
   const navigate = useNavigate();
   const theme = useTheme();
   

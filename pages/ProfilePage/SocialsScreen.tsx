@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '@contexts/AuthContext';
 import { FaGoogle, FaFacebook, FaEnvelope, FaCheck, FaUnlink, FaLink } from 'react-icons/fa';
 import { updateProfile, linkWithPopup, GoogleAuthProvider, FacebookAuthProvider, unlink } from 'firebase/auth';
 
 export function SocialsScreen() {
-  const { currentUser } = useAuth();
+  
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');

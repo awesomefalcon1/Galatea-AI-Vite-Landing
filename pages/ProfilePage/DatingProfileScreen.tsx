@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '@contexts/AuthContext';
 import { 
   FaHeart, 
   FaUser, 
@@ -43,7 +42,7 @@ interface ProfilePreferences {
 }
 
 export function DatingProfileScreen() {
-  const { currentUser } = useAuth();
+  
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');

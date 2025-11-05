@@ -191,12 +191,12 @@ export function HomePage() {
                   </p>
                 </div>
 
-                <Link to="/signup">
-                  <button 
+                <Link to="/companions">
+                  <button
                     className="bg-[#00ffff] hover:bg-[#c0fdff] text-black font-bold text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00ffff]/50 flex items-center gap-3"
                   >
                     <FaRobot className="text-xl" />
-                    START SWIPING NOW
+                    EXPLORE THE MYTHOS
                     <FaArrowRight className="text-lg" />
                   </button>
                 </Link>
