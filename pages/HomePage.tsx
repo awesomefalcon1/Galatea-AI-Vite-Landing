@@ -1,7 +1,6 @@
 import { FaRobot } from "react-icons/fa"
 import { FaArrowRight } from "react-icons/fa"
 import { HiSparkles } from "react-icons/hi2"
-import { Link } from "react-router-dom"
 
 export function HomePage() {
   return (
@@ -57,15 +56,13 @@ export function HomePage() {
                   </p>
                 </div>
 
-                <Link to="/companions">
-                  <button
-                    className="bg-[#00ffff] hover:bg-[#c0fdff] text-black font-bold text-sm md:text-base px-6 py-2.5 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00ffff]/50 flex items-center gap-2"
-                  >
-                    <FaRobot className="text-base md:text-lg" />
-                    EXPLORE THE MYTHOS
-                    <FaArrowRight className="text-base" />
-                  </button>
-                </Link>
+                <button
+                  className="bg-[#00ffff] hover:bg-[#c0fdff] text-black font-bold text-sm md:text-base px-6 py-2.5 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00ffff]/50 flex items-center gap-2"
+                >
+                  <FaRobot className="text-base md:text-lg" />
+                  EXPLORE THE MYTHOS
+                  <FaArrowRight className="text-base" />
+                </button>
               </div>
             </div>
           </div>
