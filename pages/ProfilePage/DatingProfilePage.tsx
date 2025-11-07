@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  FaHeart, 
-  FaUser, 
-  FaEdit, 
-  FaSave, 
-  FaTimes, 
-  FaMapMarkerAlt, 
+import {
+  FaHeart,
+  FaUser,
+  FaEdit,
+  FaSave,
+  FaTimes,
+  FaMapMarkerAlt,
   FaBirthdayCake,
   FaCamera,
   FaPlus,
@@ -13,7 +13,6 @@ import {
   FaCheck
 } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi2';
-import { updateProfile } from 'firebase/auth';
 
 // Mock interfaces since we don't have the actual lib file
 interface DatingProfile {
@@ -87,49 +86,15 @@ export function DatingProfilePage() {
     { value: 'serious', label: 'Long-term relationship' }
   ];
 
-  useEffect(() => {
-    if (currentUser) {
-      loadUserData();
-    }
-  }, [currentUser]);
-
-  const loadUserData = async () => {
-    if (!currentUser) return;
-    
-    try {
-      setLoading(true);
-      
-      // Initialize with basic info for now (since we don't have the actual lib)
-      setProfile(prev => ({
-        ...prev,
-        uid: currentUser.uid,
-        displayName: currentUser.displayName || '',
-      }));
-      
-    } catch (error: any) {
-      setError('Failed to load profile: ' + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleSaveProfile = async () => {
-    if (!currentUser) return;
-
     try {
       setLoading(true);
       setError('');
-      
-      // Update Firebase Auth profile
-      if (profile.displayName !== currentUser.displayName) {
-        await updateProfile(currentUser, {
-          displayName: profile.displayName
-        });
-      }
-      
+
+      // Save profile data (local only for now)
       setMessage('Profile updated successfully!');
       setIsEditing(false);
-      
+
       setTimeout(() => setMessage(''), 3000);
     } catch (error: any) {
       setError('Failed to update profile: ' + error.message);
@@ -163,17 +128,6 @@ export function DatingProfilePage() {
         : [...prev.genderPreference, gender]
     }));
   };
-
-  if (!currentUser) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#050714] via-[#0a0b1a] to-[#050714]">
-        <div className="text-center">
-          <h2 className="text-2xl font-cyber text-[#00ffff] mb-4">Access Denied</h2>
-          <p className="text-gray-300">Please sign in to view your profile.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#050714] via-[#0a0b1a] to-[#050714] relative overflow-hidden">
@@ -227,15 +181,7 @@ export function DatingProfilePage() {
               <div className="flex items-center gap-6 mb-6">
                 <div className="relative">
                   <div className="w-24 h-24 bg-gradient-to-br from-[#00ffff] to-[#ff0080] rounded-full flex items-center justify-center">
-                    {currentUser.photoURL ? (
-                      <img 
-                        src={currentUser.photoURL} 
-                        alt="Profile" 
-                        className="w-22 h-22 rounded-full object-cover"
-                      />
-                    ) : (
-                      <FaUser className="text-white text-2xl" />
-                    )}
+                    <FaUser className="text-white text-2xl" />
                   </div>
                   {isEditing && (
                     <button className="absolute -bottom-1 -right-1 bg-[#ff0080] hover:bg-[#ff0080]/80 text-white p-2 rounded-full transition-all duration-300">

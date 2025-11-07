@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { FaGoogle, FaFacebook, FaEnvelope, FaCheck, FaUnlink, FaLink } from 'react-icons/fa';
-import { updateProfile, linkWithPopup, GoogleAuthProvider, FacebookAuthProvider, unlink } from 'firebase/auth';
 
 export function SocialsScreen() {
   

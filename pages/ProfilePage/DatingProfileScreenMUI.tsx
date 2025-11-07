@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { updateProfile } from 'firebase/auth';
 import {
   Box,
   Card,
@@ -41,14 +40,37 @@ import {
   Check as CheckIcon
 } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {
-  getUserProfile,
-  saveUserProfile,
-  getUserPreferences,
-  saveUserPreferences,
-  DatingProfile,
-  ProfilePreferences
-} from '@pages/ProfilePage/firebaseIntegration/addToFirestore';
+
+// Local type definitions
+interface DatingProfile {
+  uid: string;
+  displayName: string;
+  age: number;
+  bio: string;
+  location: string;
+  interests: string[];
+  lookingFor: 'friendship' | 'dating' | 'serious' | 'casual';
+  genderIdentity: string;
+  genderPreference: string[];
+  photos: string[];
+  verified: boolean;
+  lastActive: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ProfilePreferences {
+  ageRange: { min: number; max: number };
+  maxDistance: number;
+  genderPreference: string[];
+  lookingFor: string[];
+}
+
+// Mock functions
+const getUserProfile = async (uid: string): Promise<DatingProfile | null> => null;
+const saveUserProfile = async (profile: Partial<DatingProfile>): Promise<void> => {};
+const getUserPreferences = async (uid: string): Promise<ProfilePreferences | null> => null;
+const saveUserPreferences = async (uid: string, preferences: ProfilePreferences): Promise<void> => {};
 
 // Custom cyberpunk theme
 const cyberpunkTheme = createTheme({

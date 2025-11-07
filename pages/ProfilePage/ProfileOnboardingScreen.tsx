@@ -43,12 +43,35 @@ import {
   Done as DoneIcon,
   Check as CheckIcon
 } from '@mui/icons-material';
-import {
-  getUserProfile,
-  saveUserProfile,
-  DatingProfile,
-  ProfilePreferences
-} from '@/lib/datingProfile';
+
+// Local type definitions
+interface DatingProfile {
+  uid: string;
+  displayName: string;
+  age: number;
+  bio: string;
+  location: string;
+  interests: string[];
+  lookingFor: 'friendship' | 'dating' | 'serious' | 'casual';
+  genderIdentity: string;
+  genderPreference: string[];
+  photos: string[];
+  verified: boolean;
+  lastActive: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ProfilePreferences {
+  ageRange: { min: number; max: number };
+  maxDistance: number;
+  genderPreference: string[];
+  lookingFor: string[];
+}
+
+// Mock functions
+const getUserProfile = async (uid: string): Promise<DatingProfile | null> => null;
+const saveUserProfile = async (profile: Partial<DatingProfile>): Promise<void> => {};
 
 interface OnboardingStep {
   id: string;

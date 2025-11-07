@@ -1,1 +1,0 @@
-//Anything in here is protected by the auth context

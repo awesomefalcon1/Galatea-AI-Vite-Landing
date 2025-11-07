@@ -9,13 +9,36 @@ import {
   FaSearch
 } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi2';
-import { 
-  getPotentialMatches, 
-  getUserProfile, 
-  getUserPreferences, 
-  DatingProfile,
-  ProfilePreferences 
-} from '@/lib/datingProfile';
+
+// Local type definitions
+interface DatingProfile {
+  uid: string;
+  displayName: string;
+  age: number;
+  bio: string;
+  location: string;
+  interests: string[];
+  lookingFor: 'friendship' | 'dating' | 'serious' | 'casual';
+  genderIdentity: string;
+  genderPreference: string[];
+  photos: string[];
+  verified: boolean;
+  lastActive: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ProfilePreferences {
+  ageRange: { min: number; max: number };
+  maxDistance: number;
+  genderPreference: string[];
+  lookingFor: string[];
+}
+
+// Mock functions
+const getPotentialMatches = async (uid: string, preferences: ProfilePreferences, userProfile: DatingProfile): Promise<DatingProfile[]> => [];
+const getUserProfile = async (uid: string): Promise<DatingProfile | null> => null;
+const getUserPreferences = async (uid: string): Promise<ProfilePreferences | null> => null;
 
 export function MatchesPage() {
   

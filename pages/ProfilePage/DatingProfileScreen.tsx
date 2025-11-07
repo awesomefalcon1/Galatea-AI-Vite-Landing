@@ -12,7 +12,6 @@ import {
   FaMinus,
   FaCheck
 } from 'react-icons/fa';
-import { updateProfile } from 'firebase/auth';
 
 // Mock functions for now - these would be replaced with actual Firebase functions
 const mockGetUserProfile = async (uid: string) => null;
