@@ -3,10 +3,16 @@
 # dependencies
 /node_modules
 
+# lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
 # next.js
 /.next/
 /out/
 .DS_Store
+
 # production
 /build
 
